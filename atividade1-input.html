@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Média Aritmética</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h2>Calcular Média</h2>
+    <label for="nota1">Nota 1:</label>
+    <input type="number" id="nota1" step="0.01"><br><br>
+    <label for="nota2">Nota 2:</label>
+    <input type="number" id="nota2" step="0.01"><br><br>
+    <button onclick="calcularMedia()">Calcular</button>
+
+    <p>Média: <span id="media"></span></p>
+    <p>Situação: <span id="situacao"></span></p>
+
+    <script>
+        function calcularMedia() {
+            const nota1 = parseFloat(document.getElementById("nota1").value);
+            const nota2 = parseFloat(document.getElementById("nota2").value);
+            const mediaSpan = document.getElementById("media");
+            const situacaoSpan = document.getElementById("situacao");
+
+            if (isNaN(nota1) || isNaN(nota2)) {
+                alert("Por favor, insira valores válidos para as notas.");
+                return;
+            }
+
+            const media = (nota1 + nota2) / 2;
+            mediaSpan.innerHTML = media.toFixed(2);
+
+            if (media >= 6) {
+                situacaoSpan.innerHTML = "Aprovado";
+                situacaoSpan.style.color = "blue";
+            } else {
+                situacaoSpan.innerHTML = "Reprovado";
+                situacaoSpan.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
