@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Item à Lista</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        ul {
+            margin-top: 20px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Adicionar Item à Lista</h1>
+
+    <!-- Campo de texto para o item -->
+    <label for="itemText">Texto do Item:</label>
+    <input type="text" id="itemText" placeholder="Digite o texto do item">
+
+    <!-- Botões de rádio para a cor -->
+    <fieldset>
+        <legend>Escolha a cor:</legend>
+        <label>
+            <input type="radio" name="cores" value="red" checked> Vermelho
+        </label>
+        <label>
+            <input type="radio" name="cores" value="green"> Verde
+        </label>
+        <label>
+            <input type="radio" name="cores" value="blue"> Azul
+        </label>
+    </fieldset>
+
+    <!-- Botão para adicionar o item -->
+    <button id="addItemButton">Adicionar Item</button>
+
+    <!-- Lista -->
+    <ul id="myList">
+        <li>Item inicial 1</li>
+        <li>Item inicial 2</li>
+    </ul>
+
+    <script>
+        // Selecionando os elementos
+        const button = document.getElementById("addItemButton");
+        const itemText = document.getElementById("itemText");
+        const list = document.getElementById("myList");
+
+        // Função para adicionar item
+        function addItem() {
+            // Obtendo o texto do item
+            const text = itemText.value.trim();
+            if (!text) {
+                alert("Por favor, insira um texto para o item.");
+                return;
+            }
+
+            // Obtendo a cor selecionada
+            const color = document.querySelector('input[name="cores"]:checked').value;
+
+            // Criando o novo item
+            const newItem = document.createElement("li");
+            newItem.textContent = text;
+            newItem.style.color = color;
+
+            // Adicionando o item à lista
+            list.appendChild(newItem);
+
+            // Limpando o campo de texto
+            itemText.value = "";
+        }
+
+        // Adicionando o evento ao botão
+        button.addEventListener("click", addItem);
+    </script>
+</body>
+</html>
