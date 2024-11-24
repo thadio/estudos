@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label, input, button {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        .normal {
+            color: green;
+        }
+
+        .alerta {
+            color: orange;
+        }
+
+        .perigo {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de IMC</h1>
+    <label for="peso">Peso (kg):</label>
+    <input type="number" id="peso" step="0.1" placeholder="Exemplo: 70">
+    <label for="altura">Altura (m):</label>
+    <input type="number" id="altura" step="0.01" placeholder="Exemplo: 1.75">
+    <button onclick="calcularIMC()">Calcular IMC</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function calcularIMC() {
+            // Obtendo os valores de peso e altura
+            const peso = parseFloat(document.getElementById("peso").value);
+            const altura = parseFloat(document.getElementById("altura").value);
+            const resultadoDiv = document.getElementById("resultado");
+
+            // Validando entradas
+            if (isNaN(peso) || isNaN(altura) || peso <= 0 || altura <= 0) {
+                resultadoDiv.innerHTML = "Por favor, insira valores válidos para peso e altura.";
+                resultadoDiv.className = ""; // Remove classes de estilo
+                return;
+            }
+
+            // Calculando IMC
+            const imc = peso / (altura * altura);
+
+            // Determinando a situação e a cor
+            let situacao = "";
+            let classe = "";
+
+            if (imc < 16) {
+                situacao = "Muito abaixo do peso";
+                classe = "perigo";
+            } else if (imc >= 16 && imc < 17) {
+                situacao = "Abaixo do peso";
+                classe = "alerta";
+            } else if (imc >= 17 && imc < 18.5) {
+                situacao = "Abaixo do peso";
+                classe = "alerta";
+            } else if (imc >= 18.5 && imc < 25) {
+                situacao = "Peso normal";
+                classe = "normal";
+            } else if (imc >= 25 && imc < 30) {
+                situacao = "Acima do peso";
+                classe = "alerta";
+            } else if (imc >= 30 && imc < 35) {
+                situacao = "Obesidade I";
+                classe = "perigo";
+            } else if (imc >= 35 && imc < 40) {
+                situacao = "Obesidade II";
+                classe = "perigo";
+            } else {
+                situacao = "Obesidade III";
+                classe = "perigo";
+            }
+
+            // Exibindo o resultado
+            resultadoDiv.innerHTML = `Seu IMC é <strong>${imc.toFixed(2)}</strong>. Situação: <span class="${classe}">${situacao}</span>.`;
+        }
+    </script>
+</body>
+</html>
